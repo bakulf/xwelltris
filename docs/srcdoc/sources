@@ -1,0 +1,4 @@
+../../src/*.cxx
+../../src/include/*.h
+../../src/x11/*.cxx
+../../src/x11/*.h

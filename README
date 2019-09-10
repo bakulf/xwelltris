@@ -1,0 +1,86 @@
+
+============================================================================
+
+                        XWelltris - tetris like game
+
+============================================================================
+
+1. Introduction
+
+  XWelltris is a tetris like popular game. The idea of this game was by 
+  Pogitnov russian programmer. Imaging that you are looking into the glass 
+  from the top. You see four walls and the bottom. The flat 2d figures falling
+  down from the walls one by one. You can move these figures from one wall to
+  another or rotate the figure. If the figure leave the wall it moves on the
+  bottom while another figure is pushed. You need to form full rows and/or 
+  columns on the bottom. When you form such row it disappear and you receive
+  additional empty space on the bottom and scores :). The more rows disappear
+  at a time, the more scores you have. If you can't place the whole figure on
+  the bottom, then it stays on the wall and this wall became frozen (you can't
+  place figures on it) for a while. After n-th rows were successfuly cleared,
+  you will receive binus figure and goto to the next level - game speed will 
+  be increased. You task is to play more longer and earn more scores.
+
+============================================================================
+
+2. Installation of the game
+
+  ./configure
+  make
+  make install
+
+  More detail installation process described in 'INSTALL' file in this 
+  directory.
+
+============================================================================
+
+3. Playing
+
+  Type 'xwelltris' from the X Window for playing the game.
+  First of all you see the options screen, where you can customize you game.
+  The options are:
+
+     - Dutris, Tritris, Tetris, Pentris, Sixtris - game type that define a 
+       number of piece the figure is. Dutris - figures from two pieces only.
+       Tritris from three pieces. Tetris from four and so on...
+
+     - Mixed. Turn it on and you will play with mixed figures. For example if
+       you choose tetris type below, then you will play with figure from two,
+       three and four piece. If thhis option will be off then figures will be
+       only from four pieces. This option gives you easier game but less 
+       scores.
+
+     - Rotation. This option turn on inner rotation of the game board, one
+       by one on each level up. This is very funny and more harder to play.
+       And of couse if harder then more scores at a time :)
+
+     - Next piece. This option turn on showing of next figure that will fall 
+       down on the game board. It's allow you to know and have additional time
+       for thinking. Of couse if you turn it on you will have less scores.
+
+
+  Press 'New game' for playing, then type you name and enjoy playing.
+  'Top nine' :) key shows high scores table of current game type (dutris,...)
+
+  And 'Exit' will kill the game.
+
+============================================================================
+
+4. Additional info
+
+  XWelltris stores high scores table in the file named 'welltris.scores'.
+  First of all it search global welltris.scores in /usr/share/xwelltris.
+  If this file exists and writable then xwelltris uses it. Otherwise it
+  create your own welltris.scores in ~/.xwelltris directory 
+  (in your home dir). If you want to clear scores table simple remove
+  welltris.scores file and xwelltris create it again.
+
+============================================================================
+
+This game implementation is under GNU GPL2 license, so you can modify and 
+redistribute it with the rules described in 'LICENSE' file in this dir.
+
+
+
+(c) 2002 by Leonid V. Khramov aka Leo <leo@xnc.dubna.su> 
+ 

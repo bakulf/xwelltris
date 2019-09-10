@@ -1,0 +1,61 @@
+==============================================================================
+                  XWelltris Project - tetris like game
+==============================================================================
+
+1. Installation from source tarball (xwelltris-version.src.tar.gz):
+
+First of all you need to unpack tarball, use this command :
+
+   gunzip -c xwelltris-version.src.tar.gz | tar xvf -
+
+After that you can see directory named 'xwelltris-version', change your 
+current dir to it:
+
+   cd xwelltris-version
+
+Then you need to configure and make the game:
+
+   ./configure
+   make
+
+The default installation path is in /usr/bin and /usr/share/xwelltris dirs.
+If you want to install to another dirs, for example in your home subdirs,
+you need to say about this in configure:
+
+   ./configure --prefix=/home/user
+   make
+
+After make is done with no errors, then install the game:
+
+   make install
+
+Be sure that your $prefix/bin directory is in your $PATH environment variable.
+
+That's all, now you can enjoy the game by typing:
+
+   xwelltris
+
+P.S: XWelltris is the X Window game so it needs Xlibs and X headers to compile
+Be shure that you have it installed.
+
+==============================================================================
+
+2. Installation from binaries tarball.
+
+You need to gain root account, then change you dir to '/':
+
+   cd /
+   gunzip -c /dir_of_xwelltris_tarball/xwelltris-version.tar.gz | tar xvf -
+
+That's it!
+
+Now type 'xwelltris' under X Window for playing.
+
+==============================================================================
+
+P.S: If You like xwelltris, please, send me a letter with names of 
+country and city where you are playing the game. It's for my collection.
+
+Thank you.
+Leo <leo@xnc.dubna.su> (31-03-2002)
+                     

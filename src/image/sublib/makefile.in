@@ -1,0 +1,93 @@
+#  Image Engine for X Window
+#                                
+#  Copyright (C) 1996 by Leo Khramov
+#  email:      leo@pop.convey.ru
+#  Fido:       2:5030/627.15
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+
+include ../../make.conf
+
+@MCOMMON@
+
+           IOBJS = SDL_surface.o SDL_rwops.o SDL_error.o SDL_to_picinfo.o \
+		IMG_gif.o
+           CXXINCLUDES=$(XINC) $(JINC)
+           CXXOPT=-I../.. -I../../include $(CFLAGS) $(DEFS) $(DEB) $(PSEUDO) $(PCX) $(TIFF) $(BMP) $(XBM) $(XPM) $(TGA) $(PCD) $(PNG)
+
+
+
+all:: $(IOBJS)
+
+SDL_surface.o: SDL_surface.c
+	 $(CC) -c SDL_surface.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+SDL_error.o: SDL_error.c
+	 $(CC) -c SDL_error.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+SDL_to_picinfo.o: SDL_to_picinfo.c
+	 $(CC) -c SDL_to_picinfo.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+SDL_rwops.o: SDL_rwops.c
+	 $(CC) -c SDL_rwops.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+IMG_gif.o: IMG_gif.c
+	 $(CC) -c IMG_gif.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+jpeg.o: jpeg.c
+	 $(CC) -c jpeg.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+accel.o: accel.c
+	 $(CC) -c accel.c $(CXXOPT) $(CXXINCLUDES) $(CPPFLAGS)
+
+pcdr.o: pcdr.c
+	 $(CC) -c pcdr.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+inter.o: inter.c
+	 $(CC) -c inter.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+huff.o: huff.c
+	 $(CC) -c huff.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+file.o: file.c
+	 $(CC) -c file.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+yuv2rgb.o: yuv2rgb.c
+	 $(CC) -c yuv2rgb.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+tiffr.o: tiffr.c
+	 $(CC) -c tiffr.c $(CXXOPT)  $(INCLUDES) $(CPPFLAGS)
+
+png.o: png.c
+	 $(CC) -c png.c $(CXXOPT) $(INCLUDES) $(ZINC) $(PNGINC) $(CPPFLAGS)
+
+../zlib/libz.a:
+	cd ../zlib && make
+
+../libpng/libpng.a:
+	cd ../libpng && make
+
+pcxr.o: pcxr.c
+	 $(CC) -c pcxr.c $(CXXOPT) $(INCLUDES) $(CPPFLAGS)
+
+libie.a: $(IOBJS)
+	 $(RM) -f libie.a
+	 ar rc libie.a $(IOBJS)
+	 @RANLIB@ libie.a
+
+clean:
+	 $(RM) -f libie.a
+	 $(RM) -f *.o
+
+FORCE:
+
+

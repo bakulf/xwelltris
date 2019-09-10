@@ -1,0 +1,220 @@
+#! /bin/sh
+#Making distribution for XWELLTRIS
+
+#Using this dir as temporary for package creation
+tmpdir="/tmp"
+ourname=$0
+instdir=usr
+
+create_binaries ()
+{
+#Binary package creation
+        vers="$1"
+        mkdir $tmpdir/xwelltris-$vers
+        echo -n "Copying binaries to "$tmpdir/xwelltris-$vers" directory....."
+        curdir=`pwd`
+        cdr=$curdir
+        cd $tmpdir/xwelltris-$vers
+        mkdir -p $instdir/bin
+        mkdir -p $instdir/doc/xwelltris-$vers
+        mkdir -p $instdir/share/xwelltris
+        cp -f $cdr/xwelltris $instdir/bin/
+	cp -f $cdr/data/polyomino.dat \
+           $cdr/data/board2.gif \
+           $cdr/data/font2.gif \
+           $cdr/data/topnine.gif \
+           $cdr/data/wellcuts.gif \
+           $cdr/data/wellintro.gif \
+	   $instdir/share/xwelltris
+
+	cp -f $cdr/README \
+	    $cdr/README.keys \
+	    $cdr/AUTHORS \
+	    $cdr/LICENSE \
+	    $cdr/Changelog $instdir/doc/xwelltris-$vers
+
+        echo "...OK"
+        echo -n "Creating TAR Gzipped $2 package...."
+        tar -cf $curdir/xwelltris-$vers.$2.tar .
+        echo -n "......."
+        gzip $curdir/xwelltris-$vers.$2.tar
+        cd ..
+        echo "....OK"
+        cd $curdir
+        echo -n "Cleaning tmp directory...."
+        rm -rf $tmpdir/xwelltris-$vers
+        echo "OK"
+        echo "Package was created succesfully."
+        echo ""
+        echo "Package name: "$curdir/xwelltris-$vers.$2.tar.gz
+}
+
+create_prompted_binaries ()
+{
+        echo -n "Enter platform: "
+        read platform
+        create_binaries $1 "$platform"
+}
+
+create_binaries_for_rpm ()
+{
+        vers="$1"
+        mkdir $tmpdir/xwelltris-$vers
+        echo -n "Copying all files to "$tmpdir/xwelltris-$vers" directory....."
+        cp -rf * $tmpdir/xwelltris-$vers
+        cp -rf ./.xlaunch $tmpdir/xwelltris-$vers
+        echo "OK"
+        curdir=`pwd`
+        cd $tmpdir/xwelltris-$vers
+        echo -n "Cleaning directories...."
+        ./makebinclean-rpm
+        echo "OK"
+        cd $tmpdir
+        echo -n "Creating TAR Gzipped package for RPM...."
+        tar cf $curdir/xwelltris-$vers.elf.tar xwelltris-$vers
+        echo -n "....."
+        gzip $curdir/xwelltris-$vers.elf.tar
+        echo "....OK"
+        cd $curdir
+        echo -n "Cleaning tmp directory...."
+        rm -rf $tmpdir/xwelltris-$vers
+        echo "OK"
+        echo "Package was created succesfully."
+        echo "Package name: "$curdir/xwelltris-$vers.elf.tar.gz
+}
+
+extract_rpm ()
+{
+    vers="$1"
+    echo "Extracting rpm spec file to 'xwelltris-$vers.spec' from $ourname"
+    a=`grep -n 'RPM Spec File' $ourname | grep -v grep | tr ':' ' ' \
+    | awk '{print $1}'`
+    b=`wc -l $ourname | awk '{print $1}'`
+    tail -n `expr $b - $a + 1` $ourname | sed \
+    -e "s/^Version:[^\n]*/Version: $vers/" >xwelltris-$vers.spec
+}
+
+echo "-----------------------------------------------------------------"
+echo "XWelltris distribution package creator."
+echo "Welcome to creation script v2.2.4"
+echo "-----------------------------------------------------------------"
+echo -n "Enter XWelltris version: "
+read vers
+
+while :
+do
+echo ""
+echo "Choose one of the following:"
+echo ""
+echo "   1.  Create Linux x86 binaries package.......(Linux.x86.tar.gz)."
+echo "   2.  Create Linux Alpha binaries package.....(Linux.alpha.tar.gz)."
+echo "   3.  Create Linux PPC binaries package.......(Linux.PPC.tar.gz)."
+echo "   4.  Create FreeBSD binaries package.........(FreeBSD.tar.gz)."
+echo "   5.  Create NetBSD x86 binaries package......(NetBSD.x86.tar.gz)."
+echo "   6.  Create OpenBSD x86 binaries package.....(OpenBSD.x86.tar.gz)."
+echo "   7.  Create Solaris x86 binaries package.....(Solaris.x86.tar.gz)."
+echo "   8.  Create Solaris SPARC binaries package...(Solaris.SPARC.tar.gz)."
+echo "   9.  Create AIX binaries package.............(AIX.tar.gz)."
+echo "  10.  Create HP-UX binaries package...........(HP-UX.tar.gz)."
+echo "  11.  Create DUNIX (OSF1) binaries package....(DUnix.tar.gz)."
+echo "  12.  Create IRIX binaries package............(IRIX.tar.gz)."
+echo "  13.  Create QNX binaries package.............(QNX.tar.gz)."
+echo "  14.  Create prompted binaries package."
+echo ""
+echo "  19.  Extract RPM spec file...................(xwelltris-$vers.spec)."
+echo ""
+echo "   0.  Exit"
+echo ""
+echo -n "Your choice: "
+read choice
+
+case "$choice" in
+        1)  create_binaries "$vers" "Linux.x86";;
+        2)  create_binaries "$vers" "Linux.alpha";;
+        3)  create_binaries "$vers" "Linux.PPC";;
+        4)  create_binaries "$vers" "FreeBSD";;
+        5)  create_binaries "$vers" "NetBSD.x86";;
+        6)  create_binaries "$vers" "OpenBSD.x86";;
+        7)  create_binaries "$vers" "Solaris.x86";;
+        8)  create_binaries "$vers" "Solaris.SPARC";;
+        9)  create_binaries "$vers" "AIX";;
+       10)  create_binaries "$vers" "HP-UX";;
+       11)  create_binaries "$vers" "DUnix";;
+       12)  create_binaries "$vers" "IRIX";;
+       13)  create_binaries "$vers" "QNX";;
+       14)  create_prompted_binaries "$vers";;
+       19)  extract_rpm "$vers";;
+        0)  exit 0;;
+esac
+done
+echo "-----------------------------------------------------------------"
+exit 
+#----------------------Cut from this line-------------------------------
+#---------------RPM Spec File for XWelltris--------------------
+
+%define prefix /usr
+
+Summary: XWelltris - a tetris like popular game for X Window
+Name: xwelltris
+Version: 
+Release: 1
+Copyright: GPL
+Packager: Leonid Khramov 
+Group: X11/Applications
+Source0: %{name}-%{version}.src.tar.gz
+#Icon: 
+BuildRoot: /tmp/%{name}-%{version}-root
+
+%description
+This is a small tetris like game for X Window.
+Imaging that you are looking into the glass from the top. 
+You see four walls and the bottom. The flat 2d figures falling
+down from the walls one by one. You can move these figures from one wall to
+another or rotate them...
+
+%prep
+%setup
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS=-s ./configure \
+	--prefix=%{prefix} --with-x
+make       
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+install -d "$RPM_BUILD_ROOT"/%{prefix}/{bin,share/xwelltris}
+
+install xwelltris "$RPM_BUILD_ROOT"/%{prefix}/bin
+
+mkdir -p "$RPM_BUILD_ROOT"/etc/X11/wmconfig
+cat > "$RPM_BUILD_ROOT"/etc/X11/wmconfig/xwelltris <<EOF
+xwelltris name "XWelltris"
+xwelltris description "tetris like game"
+xwelltris icon "game.xpm"
+xwelltris group "Games"
+xwelltris exec "xwelltris &"
+EOF
+ 
+install -m 644  data/polyomino.dat \
+                data/board2.gif \
+                data/font2.gif \
+                data/topnine.gif \
+                data/wellcuts.gif \
+                data/wellintro.gif \
+                "$RPM_BUILD_ROOT"/%{prefix}/share/xwelltris
+
+find "$RPM_BUILD_ROOT" -type f | sed "s;$RPM_BUILD_ROOT;%attr(-,root,root) /;" \
+  > $RPM_BUILD_DIR/file.list-%{name}-%{version}
+echo "%attr(-,root,root) %doc README README.keys AUTHORS LICENSE Changelog" \
+ >> $RPM_BUILD_DIR/file.list-%{name}-%{version}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+rm -f ../file.list-%{name}-%{version}
+
+%files -f ../file.list-%{name}-%{version}
+
+
+
+

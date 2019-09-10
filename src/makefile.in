@@ -1,0 +1,117 @@
+#  XWelltris - a tetris like game
+#                                
+#  Copyright (C) 2002 by Leo Khramov
+#  email:  leo@xnc.dubna.su
+#  
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License 2 for more details.
+#
+include make.conf
+
+@MCOMMON@
+
+.c.o:
+	$(CC) -c $(CXXINCLUDES) $(INCLUDES) $(CXXOPT) $< -o $@
+
+IFACELIBS=@IFACELIBS@
+IFACEINC=@IFACEINC@
+IFACEOBJS=@IFACEOBJS@
+
+           X11IMAGE = \
+		image/sublib/SDL_error.o \
+		image/sublib/SDL_rwops.o \
+		image/sublib/SDL_surface.o \
+		image/sublib/SDL_to_picinfo.o \
+		image/sublib/IMG_gif.o \
+		image/image.o \
+		image/convert.o \
+		image/accel.o
+           X11OBJS = \
+		x11/xwellengine.o \
+		x11/xwelldrawing.o \
+		x11/xwellinput.o \
+		x11/xwellimagefont.o
+           SDLOBJS = \
+		sdl/sdl_gfxprimitives.o \
+		sdl/sdlwellengine.o \
+		sdl/sdlwellimagefont.o \
+		sdl/sdlwellinput.o \
+		sdl/sdlwelldrawing.o
+
+           OBJS = \
+		mydebug.o \
+		main.o \
+		rndgen.o \
+		geometry.o \
+		commonfuncs.o \
+		wellclass.o \
+		welldrawing.o \
+		wellengine.o \
+		wellsimpledraw.o \
+		wellimagefont.o  \
+		welltopnine.o \
+		wellintro.o \
+		wellkey.o \
+		wellswitch.o \
+		wellinput.o  \
+		$(IFACEOBJS)
+
+           CXXINCLUDES=$(IFACEINC) 
+           CXXOPT=$(DEFS) $(DEB) $(CFLAGS)
+           LOCAL_LIBRARIES=$(IFACELIBS) $(LIBS)
+
+PROGRAM =../xwelltris
+
+all:: $(PROGRAM)
+
+image/sublib/SDL_error.o: image/sublib/SDL_error.c
+	cd image && make sublib/SDL_error.o
+
+image/sublib/SDL_surface.o: image/sublib/SDL_surface.c
+	cd image && make sublib/SDL_surface.o
+
+image/sublib/SDL_rwops.o: image/sublib/SDL_rwops.c
+	cd image && make sublib/SDL_rwops.o
+
+image/sublib/SDL_to_picinfo.o: image/sublib/SDL_to_picinfo.c
+	cd image && make sublib/SDL_to_picinfo.o
+
+image/sublib/IMG_gif.o: image/sublib/IMG_gif.c
+	cd image && make sublib/IMG_gif.o
+
+image/accel.o: image/accel.c
+	cd image && make accel.o
+
+image/image.o: image/image.cxx
+	cd image && make image.o
+
+image/convert.o: image/convert.cxx
+	cd image && make convert.o
+
+$(JLOC): FORCE
+	   -(cd jpeg && make) 
+
+
+$(PROGRAM): $(OBJS)
+	$(CXX) -o $@ $(OBJS) $(DEB) $(STRIPPING) $(CFLAGS) $(LDFLAGS) $(LOCAL_LIBRARIES)
+
+mydebug.o: mydebug.c
+	$(CC) -c $< $(CXXOPT) $(CXXINCLUDES) $(INCLUDES) $(CPPFLAGS)
+
+clean:
+	$(RM) -f *.o
+	$(RM) -f */*.o
+	(cd image && make clean)
+
+tags: FORCE
+	etags *.cxx x11/*.cxx sdl/*.cxx include/*.h
+
+FORCE:

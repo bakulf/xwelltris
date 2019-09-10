@@ -1,0 +1,32 @@
+=========================================================================
+Here are the keys in game XWelltris:
+
+        Move figure right:
+             -Right Arrow
+             -Num pad '6'
+             -Main keyboard 'L' key
+
+        Move figure left:
+             -Left Arrow
+             -Num pad '4'
+             -Main keyboard 'J' key
+
+        Rotate figure:
+             -Up or Down Arrow
+             -Num pad '5'
+             -Main keyboard 'K' key
+
+        Drop figure down:
+             -Space
+             -Num pad 'Insert'
+
+        Pause/Unpause game:
+             -Main keyboard 'P' key
+             -Pause key
+
+	Quit game:
+             -Main keyboard 'Q' key
+	     -F10 key
+             -Escape key
+
+That's all.

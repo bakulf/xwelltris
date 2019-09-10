@@ -1,0 +1,63 @@
+# ./Make.common.in	 -*- Makefile -*-
+# Makefile common definisions for XNC Project
+# 
+
+srcdir = @srcdir@
+VPATH  = @srcdir@
+
+SHELL = /bin/sh
+
+# Installation target directories & other installation stuff
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+binprefix =
+manprefix =
+bindir = @bindir@
+mandir = @mandir@/man1
+manext = 1
+
+# Tools & program stuff
+CC = @CC@
+CXX = @CXX@
+CPP = @CPP@
+RM = @RM@
+RMF = @RM@ -f
+CP = @CP@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL@ -s -m 755
+INSTALL_DATA = @INSTALL@ -m 644
+INSTALL_SHARE_DATA = @INSTALL@ -m 666
+INS=@INSTALL@ -m 755
+INSM=@INSTALL@  -m 644
+INSD=@INSTALL@ -d -m 755
+INSOWN=@INSTALL@
+INSTDIR=@prefix@/bin
+INSTLIB=@prefix@/share/xwelltris
+INSTMAN=@prefix@/man
+DEB=@DEB@
+STRIPPING=
+XINC=@X_CFLAGS@
+XLIBS=@X_PRE_LIBS@ @X_LIBS@ @X_EXTRA_LIBS@ -lX11 -lXext
+
+CFLAGS = @CFLAGS@ $(PLUGINFLAGS)
+CPPFLAGS = @CPPFLAGS@ #-DHAVE_LIBXPM
+LDFLAGS = @LDFLAGS@
+SHAREFLAGS = @SHAREFLAGS@
+LD_SHAREFLAGS= @LD_SHAREFLAGS@
+PLUGINS = @PLUGINS@
+DEFS = @DEFS@
+LIBS = @LIBS@
+INCLUDES=-DHAVE_CONFIG_H -I. -I./.. -I./image -I./include -I../include
+
+# extra libraries needed by X on some systems, X library location
+XLIB = @X_LIBS@ @X_PRE_LIBS@ -lX11 @X_EXTRA_LIBS@ #-L/usr/local/lib -lXpm
+
+
+.SUFFIXES: .cxx .c
+
+.cxx.o:
+	$(CXX) -c $(CXXINCLUDES) $(INCLUDES) $(CXXOPT) $< -o $@
+
+# End of Make.common
+
+

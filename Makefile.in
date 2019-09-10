@@ -1,0 +1,52 @@
+#  XWelltris - tetris like popular game  
+#                                
+#  Copyright (C) 2002 by Leo Khramov
+#  email:  leo@xnc.dubna.su
+#  
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+
+@MCOMMON@
+
+           DATAFILES= \
+		data/polyomino.dat \
+		data/board2.gif \
+		data/font2.gif \
+		data/topnine.gif \
+		data/wellcuts.gif \
+		data/wellintro.gif
+
+           SHARE_DATAFILES= \
+                data/welltris.scores
+
+           PROGRAM = xwelltris
+
+all:: $(PROGRAM)
+
+$(PROGRAM): FORCE
+	-(cd src && make)
+
+install:
+	$(INSD) $(INSTLIB)
+	$(INSTALL_DATA) $(DATAFILES) $(INSTLIB)
+	$(INSTALL_SHARE_DATA) $(SHARE_DATAFILES) $(INSTLIB)
+	$(INSTALL_PROGRAM) $(PROGRAM) $(INSTDIR)
+
+uninstall:
+	$(RM) -f $(INSTDIR)/$(PROGRAM)
+	$(RM) -rf $(INSTLIB)
+
+clean:
+	$(RM) -f $(PROGRAM)
+	-(cd src && make clean)
+
+FORCE:
