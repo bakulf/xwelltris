@@ -2,7 +2,7 @@
 #define XNC_GLOBALS_H
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include <config.h>
 #endif
 
 #include <globdef.h>
@@ -80,7 +80,7 @@
 #define W_PI  3.14159265358979323846
 
 #define LOCAL_SEARCH     ".xwelltris"
-#define GLOBAL_SEARCH    "/usr/share/xwelltris"
+#define GLOBAL_SEARCH    "/tmp/BUILD/share/xwelltris"
 
 
 #endif
