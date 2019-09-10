@@ -73,7 +73,7 @@ void SDLWellDrawingEngine::init(int inum_fields, int idx, int idy,
 	fields[i]=SDL_DisplayFormat(surface);
 	SDL_FreeSurface(surface);
 	if(fields[i]>0)
-	    clear_field(i);
+	    clear_field();
     }
     bg_color=colors[BackColor];
     fg_color=colors[GridColor];
@@ -306,10 +306,10 @@ void SDLWellDrawingEngine::draw_grid()
 }
 
 //===========================================================================
-/// global clear_field(int i)
+/// global clear_field()
 ///     clear field with given index with BackColor (black) 
 /// tags SDLWellDrawingEngine
-void SDLWellDrawingEngine::clear_field(int)
+void SDLWellDrawingEngine::clear_field()
 {
     boxRGBA(*fields, 0, 0, l, h, 
 	    RGBA[BackColor*4],

@@ -60,7 +60,7 @@ void XWellDrawingEngine::init(int inum_fields, int idx, int idy,
     {
       gcs[i]=XCreateGC(disp,fields[i],0,0);
       XSetBackground(disp,gcs[i],colors[FreezeColor]);
-      clear_field(i);
+      clear_field();
     }
   }
 }
@@ -257,10 +257,10 @@ void XWellDrawingEngine::draw_grid()
 }
 
 //===========================================================================
-/// global clear_field(int i)
+/// global clear_field()
 ///     clear field with given index with BackColor (black) 
 /// tags XWellDrawingEngine
-void XWellDrawingEngine::clear_field(int)
+void XWellDrawingEngine::clear_field()
 {
   XSetForeground(disp,*gcs,colors[BackColor]);
   XFillRectangle(disp,*fields,*gcs,0,0,l,h);

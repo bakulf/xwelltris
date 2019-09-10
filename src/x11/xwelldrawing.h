@@ -34,7 +34,7 @@ class XWellDrawingEngine:public WellDrawingEngine
   virtual void draw_square(int color, int i, int j);
   virtual void draw_trapazoid(int color, int i, int j);
   virtual void sync();
-  virtual void clear_field(int i);
+  virtual void clear_field();
   virtual Actions key_to_action(void* event);
   virtual void  draw_line(int x1, int y1, int x2, int y2, int color_idx,
 			  Canvas where=screen);

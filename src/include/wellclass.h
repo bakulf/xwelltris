@@ -17,11 +17,13 @@ struct thing_t
   int             size, color_number;
   int             bonus, random_rotation, random_reflection;
   long            random_number;
+  bool            merged;
   thing_t() 
   { 
     squares=polyomino_number=xpos=ypos=size=0;
     color_number=bonus=random_rotation=random_reflection=0; 
     random_number=0;
+    merged=false;
   };
 };
 

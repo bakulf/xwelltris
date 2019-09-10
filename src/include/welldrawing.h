@@ -42,7 +42,7 @@ class WellDrawingEngine: public WellSimpleDraw
   virtual  void     bell(int);
   virtual  void     flush_all();
   virtual  void     flush_dirty();
-  virtual  void     clear_field(int i) {};
+  virtual  void     clear_field() {};
   virtual  void     set_field_id(int id) { current_id=id;};
   virtual  void     draw_grid() {};
   virtual  Actions  key_to_action(void* event) { return NOTHING; };

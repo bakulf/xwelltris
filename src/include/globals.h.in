@@ -80,7 +80,7 @@
 #define W_PI  3.14159265358979323846
 
 #define LOCAL_SEARCH     ".xwelltris"
-#define GLOBAL_SEARCH    "@prefix@/share/xwelltris"
+#define GLOBAL_SEARCH    "@prefix@/share/games/xwelltris"
 
 
 #endif

@@ -389,7 +389,7 @@ void WellBase::show()
   shown=true;
   default_well_engine->add_timer(this,speeds[level]);
   default_well_engine->add_object(this);
-  dre->clear_field(0);
+  dre->clear_field();
   draw_field();
   draw_thing();
 
@@ -432,6 +432,7 @@ void WellBase::redo_next()
     int turn_style = tris[squares - MIN_SQUARES].mode[diagonal].turn_style;
     int next_start, i;
 
+    nextThing.merged = false;
     nextThing.squares = squares - MIN_SQUARES + nextThing.bonus;
     nextThing.squares = nextThing.squares > MAX_SQUARES - MIN_SQUARES ? 
       MAX_SQUARES - MIN_SQUARES: nextThing.squares;
@@ -495,6 +496,8 @@ void WellBase::put_box()
 	    base[base_j][base_i].cid = curThing.color_number;
           }
 	}
+
+  curThing.merged = true;
 }
 
 
@@ -766,13 +769,14 @@ void WellBase::draw_thing()
 {
     int             i, j, xi;
     
-    for (i = 0; i < curThing.size; i++)
-      for (j = 0; j < curThing.size; j++)
-        if (tris[curThing.squares].polyomino
-                [curThing.polyomino_number].shape[j][i]) {
-          xi = (curThing.xpos + i) % MAX_PERIMETER;
-	  draw_box(curThing.color_number,xi, curThing.ypos + j);
-        }
+    if (!curThing.merged)
+      for (i = 0; i < curThing.size; i++)
+        for (j = 0; j < curThing.size; j++)
+          if (tris[curThing.squares].polyomino
+                  [curThing.polyomino_number].shape[j][i]) {
+            xi = (curThing.xpos + i) % MAX_PERIMETER;
+            draw_box(curThing.color_number,xi, curThing.ypos + j);
+          }
 }
 
 //===========================================================================
@@ -1424,14 +1428,14 @@ void WellBase::make_pause()
   if(pause)
   {
     default_well_engine->del_timer(this);
-    dre->clear_field(0);
+    dre->clear_field();
     dre->pixmap_copy(&geo[GEO_PAUSE_IDX]);
     dre->flush_all();
     dre->sync();
   } else
   {
     default_well_engine->add_timer(this,speeds[level]);
-    dre->clear_field(0);
+    dre->clear_field();
     draw_field();
     draw_thing();
     redraw_all();
@@ -1445,7 +1449,7 @@ void WellBase::make_pause()
 void WellBase::make_rotation()
 {
     dre->outer_rotation();
-    dre->clear_field(0);
+    dre->clear_field();
     draw_field();
     draw_thing();
     dre->flush_all();
