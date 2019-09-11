@@ -1,0 +1,11 @@
+*.o
+xwelltris
+Makefile
+makefile
+make.conf
+Make.common
+config.*
+*.swp
+src/include/config.h
+src/include/globals.h
+configure

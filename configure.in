@@ -213,9 +213,9 @@ esac
 AC_CONFIG_HEADER(src/include/config.h)
 AC_OUTPUT( \
     src/Make.common \
-    src/makefile \
+    src/Makefile \
     src/include/globals.h \
-    src/image/makefile \
+    src/image/Makefile \
     Makefile)
 
  echo "ZINC=" >>src/make.conf
