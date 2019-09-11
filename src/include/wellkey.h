@@ -13,7 +13,7 @@ class WellKey: public WellObject
   bool              highlight(int mx, int my);
 
  public:
-  WellKey(char* keyname);
+  WellKey(const char* keyname);
   void              set_object_on_press(ObjectCaller o) { object_on_press=o;};
   virtual bool      process_event(wEvent);
   virtual void      show();

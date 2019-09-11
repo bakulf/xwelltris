@@ -17,7 +17,7 @@ struct GeoObject
   Geo              *geo;
 };
 
-extern Geo* get_geo_by_name(char* name);
+extern Geo* get_geo_by_name(const char* name);
 
 
 #endif

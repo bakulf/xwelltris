@@ -261,69 +261,69 @@ void WellBase::read_polyominoes()
       }
       if (c == '+')
       {
-        (void) fscanf(fp, "%d", &k);
+        read_int(fp, &k);
         sq = k - MIN_SQUARES;
         for (i = 0; i < MAX_TYPES; i++)
         {
-          (void) fscanf(fp, "%d", &k);
+          read_int(fp, &k);
           tris[sq].mode[NODIAG].number[NOMIX][i] = k;
         }
-        (void) fscanf(fp, "%d", &k);
+        read_int(fp, &k);
         tris[sq].mode[NODIAG].turn_style = k;
-        (void) fscanf(fp, "%d", &k);
+        read_int(fp, &k);
         tris[sq].diagonal_switch = k;
         if (tris[sq].diagonal_switch == true)
         {
           for (i = 0; i < MAX_TYPES; i++)
           {
-            (void) fscanf(fp, "%d", &k);
+            read_int(fp, &k);
             tris[sq].mode[DIAGONAL].number[NOMIX][i] = k;
           }
-          (void) fscanf(fp, "%d", &k);
+          read_int(fp, &k);
           tris[sq].mode[DIAGONAL].turn_style = k;
         }
         c = getc(fp);
       }
       if (c == '*')
       {
-        (void) fscanf (fp, "%d", &size);
+        read_int(fp, &size);
         c = getc(fp);
       }
       if (c == '~') /* Useful for debugging Things */
       {
-        (void) fscanf (fp, "%d", &toss);
+        read_int(fp, &toss);
         c = getc(fp);
       }
       if (c == '#')
       {
-        (void) fscanf(fp, "%d", &k);
+        read_int(fp, &k);
         sq = k - MIN_SQUARES;
-        (void) fscanf(fp, "%d", &n);
+        read_int(fp, &n);
         if (tris[sq].diagonal_switch == true)
-          (void) fscanf(fp, "%d", &n);
+          read_int(fp, &n);
         for (polyomino = 0; polyomino <= toss; polyomino++)
           while ((c = getc(fp)) != EOF && c != '\n');
         for (polyomino = 0; polyomino < n - toss; polyomino++)
         {
           sum = polyomino + counter[sq];
             /* This is only there to "read" input file */
-          (void) fscanf(fp, "%d", &k);
-          (void) fscanf(fp, "%d", &k);
+          read_int(fp, &k);
+          read_int(fp, &k);
           tris[sq].polyomino[sum].rotation =
             k + counter[sq] - toss;
-          (void) fscanf(fp, "%d", &k);
+          read_int(fp, &k);
           tris[sq].polyomino[sum].reflection =
             k + counter[sq] - toss;
           for (game = JUMPIN; game <= GRADUAL; game++)
           {
-            (void) fscanf(fp, "%d", &height);
+            read_int(fp, &height);
             if (!gradualAppear && game == JUMPIN)
               tris[sq].polyomino[sum].start_height = height;
             else if (gradualAppear && game == GRADUAL)
               tris[sq].polyomino[sum].start_height = height;
             for (diag = NODIAG; diag <= tris[sq].diagonal_switch; diag++)
             {
-              (void) fscanf(fp, "%d", &start);
+              read_int(fp, &start);
               if (game == JUMPIN)
               {
                 if (sq == 0 ||
@@ -354,7 +354,7 @@ void WellBase::read_polyominoes()
           for (j = 0; j < size; j++)
             for (i = 0; i < size; i++)
             {
-              (void) fscanf(fp, "%d", &k);
+              read_int(fp, &k);
               tris[sq].polyomino[sum].shape[j][i] = k;
             }
         }
@@ -1570,4 +1570,16 @@ bool WellBase::process_action(Actions action)
     return false;
   }
   return true;
+}
+
+//===========================================================================
+/// global read_int(FILE* fp, int* k)
+///     reads an integer from a FILE object.
+/// tags WellBase
+void WellBase::read_int(FILE* fp, int* k) {
+  if (fscanf(fp, "%d", k) != 1)
+  {
+    (void) fprintf(stderr, "Can not read input file, %s\n.", POLYOMINOFILE);
+    exit(1);
+  }
 }

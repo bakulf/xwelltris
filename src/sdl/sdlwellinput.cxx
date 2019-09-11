@@ -22,10 +22,10 @@
 #include "sdlwellinput.h"
 #include "sdl_gfxprimitives.h"
 //===========================================================================
-/// global SDLWellInput(char*)
+/// global SDLWellInput(const char*)
 ///     constructor - fill name and get geometry
 /// tags SDLWellInput
-SDLWellInput::SDLWellInput(char* iname) : WellInput(iname)
+SDLWellInput::SDLWellInput(const char* iname) : WellInput(iname)
 {
   engine=(SDLWellEngine*) default_well_engine;
   mainw=engine->get_main_window();

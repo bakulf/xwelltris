@@ -26,10 +26,10 @@
 //////////////////////////////WellSwitch class///////////////////////////////
 
 //===========================================================================
-/// global WellSwitch(char*)
+/// global WellSwitch(const char*)
 ///     constructor - fill name and get geometry
 /// tags WellSwitch
-WellSwitch::WellSwitch(char* iname) : WellObject()
+WellSwitch::WellSwitch(const char* iname) : WellObject()
 {
   strncpy(object_name,iname,GEO_NAME);
   object_name[GEO_NAME]=0;

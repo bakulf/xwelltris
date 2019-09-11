@@ -49,7 +49,7 @@ void WellImageFont::set_font(unsigned int ifl, unsigned int ifh,
 /// global set_text(char*)
 ///   setting text for output
 /// tags WellImageFont
-void WellImageFont::set_text(char* itext)
+void WellImageFont::set_text(const char* itext)
 {
   strcpy(text,itext);
   text_l=strlen(text);
@@ -82,7 +82,7 @@ void WellImageFont::draw_text(Justify just)
 /// global draw_text(char *text, int text_l, Justify just)
 ///   draw text with given justification
 /// tags WellImageFont
-void WellImageFont::draw_text(char* txt, int txt_l, Justify just)
+void WellImageFont::draw_text(const char* txt, int txt_l, Justify just)
 {
   int i,draw_x;
   unsigned int draw_h;
@@ -109,10 +109,10 @@ void WellImageFont::draw_text(char* txt, int txt_l, Justify just)
 }
 
 //===========================================================================
-/// global draw_text(char *text, int text_l, Justify just)
+/// global draw_text(const char *text, int text_l, Justify just)
 ///   draw text with given justification
 /// tags WellImageFont
-void WellImageFont::draw_text(char* txt, int txt_l, Colors idx, Justify just)
+void WellImageFont::draw_text(const char* txt, int txt_l, Colors idx, Justify just)
 {
   int i,draw_x;
   unsigned int draw_h;

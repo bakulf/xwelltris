@@ -19,10 +19,12 @@
 
 
 //===========================================================================
-/// global find_full_path_for_file(char* fname, char* ret_full_pathname, FMode mode)
+/// global find_full_path_for_file(const char* fname,
+///                                char* ret_full_pathname, FMode mode)
 ///     find file in global and local dirs and return full pathname
 /// tags common_funcs
-bool find_full_path_for_file(char* name, char* ret_full_pathname, FMode mode)
+bool find_full_path_for_file(const char* name, char* ret_full_pathname,
+                             FMode mode)
 {
 #ifndef WIN32
   int    fd;

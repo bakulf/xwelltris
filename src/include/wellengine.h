@@ -69,9 +69,9 @@ class WellEngine
   virtual WellDrawingEngine* new_well_drawing_engine();
   virtual WellTopNine*       new_well_top_nine();
   virtual WellIntro*         new_well_intro();
-  virtual WellKey*           new_well_key(char*);
-  virtual WellInput*         new_well_input(char*) { return 0;};
-  virtual WellSwitch*        new_well_switch(char*);
+  virtual WellKey*           new_well_key(const char*);
+  virtual WellInput*         new_well_input(const char*) { return 0;};
+  virtual WellSwitch*        new_well_switch(const char*);
   virtual WellImageFont*     new_well_image_font(Images id, 
 						 unsigned int ifl, 
 						 unsigned int ifh, 
@@ -79,7 +79,7 @@ class WellEngine
 
   virtual WellBase*          new_well_base();
 
-  virtual bool    load_image(Images id, char* name) { return false;};
+  virtual bool    load_image(Images id, const char* name) { return false;};
   virtual void    set_main_background_image(Images id) {};
   virtual void    screen_copy(Geo*) {};
   virtual void    screen_clear(Geo*) {};

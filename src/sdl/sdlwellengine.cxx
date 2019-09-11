@@ -265,10 +265,10 @@ int SDLWellEngine::wait_for_timers()
 }
 
 //===========================================================================
-/// global load_image(Images id, char* name)
+/// global load_image(Images id, const char* name)
 ///     Load image into memory and register it with given id for use
 /// tags SDLWellEngine
-bool SDLWellEngine::load_image(Images id, char* name)
+bool SDLWellEngine::load_image(Images id, const char* name)
 {
   char buf[L_MAXPATH];
 
@@ -340,7 +340,7 @@ WellImageFont*     SDLWellEngine::new_well_image_font(Images id,
 /// global new_well_input(char*)
 ///     creates new input object - version for SDL Window
 /// tags SDLWellEngine
-WellInput* SDLWellEngine::new_well_input(char* name)
+WellInput* SDLWellEngine::new_well_input(const char* name)
 {
   return new SDLWellInput(name);
 }

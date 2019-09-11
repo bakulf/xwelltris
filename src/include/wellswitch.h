@@ -17,7 +17,7 @@ class WellSwitch: public WellObject
   bool              highlight(int mx, int my);
 
  public:
-  WellSwitch(char* keyname);
+  WellSwitch(const char* keyname);
   void              set_object_on_switch(ObjectCaller o) { object_on_switch=o;};
   virtual bool      process_event(wEvent);
   virtual void      show();

@@ -23,13 +23,13 @@ class WellImageFont: public WellSimpleDraw
 				char symb)=0;
  public:
   WellImageFont(Images id, unsigned int ifl, unsigned int ifh, int idx, int idy);
-  virtual      void set_text(char* itext);
+  virtual      void set_text(const char* itext);
   virtual      void set_font(unsigned int ifl, unsigned int ifh, 
 			     int idx, int idy);
   virtual      void set_screen_region(int ix, int iy, int il, int ih);
   virtual      void draw_text(Justify just=LeftJust);
-  virtual      void draw_text(char* text, int text_l, Justify just=LeftJust);
-  virtual      void draw_text(char* text, int text_l, Colors idx, Justify just=LeftJust);
+  virtual      void draw_text(const char* text, int text_l, Justify just=LeftJust);
+  virtual      void draw_text(const char* text, int text_l, Colors idx, Justify just=LeftJust);
   virtual      void clear_region()=0;
   virtual      void clear_region(Colors idx)=0;
 };

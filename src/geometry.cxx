@@ -176,10 +176,10 @@ GeoObject all_objects[]= {
 
 
 //===========================================================================
-/// global get_geo_by_name(char* fname)
+/// global get_geo_by_name(const char* fname)
 ///     find geometry structures for object by given name
 /// tags geometry
-Geo* get_geo_by_name(char* name)
+Geo* get_geo_by_name(const char* name)
 {
   int i=0;
   while(all_objects[i].geo)

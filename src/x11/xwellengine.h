@@ -51,9 +51,9 @@ class XWellEngine:public WellEngine
   virtual WellDrawingEngine* new_well_drawing_engine();
   virtual WellTopNine*       new_well_top_nine();
   virtual WellIntro*         new_well_intro();
-  virtual WellKey*           new_well_key(char*);
-  virtual WellSwitch*        new_well_switch(char*);
-  virtual WellInput*         new_well_input(char*);
+  virtual WellKey*           new_well_key(const char*);
+  virtual WellSwitch*        new_well_switch(const char*);
+  virtual WellInput*         new_well_input(const char*);
   virtual WellImageFont*     new_well_image_font(Images id, 
 						 unsigned int ifl, 
 						 unsigned int ifh, 
@@ -64,7 +64,7 @@ class XWellEngine:public WellEngine
   GC               get_main_gc() {return maingc;};
   Pixmap           get_pixmap_of_image(Images id) { return image_pixmaps[id];};
   unsigned long*   get_colors() { return game_colors; };
-  virtual bool     load_image(Images id, char* name);
+  virtual bool     load_image(Images id, const char* name);
   virtual void     set_main_background_image(Images id);
   virtual void     screen_copy(Geo*);
   virtual void     screen_clear(Geo*);

@@ -24,7 +24,7 @@
 /// global WellInput(char*)
 ///     constructor - fill name and get geometry
 /// tags WellInput
-WellInput::WellInput(char* iname) : WellObject()
+WellInput::WellInput(const char* iname) : WellObject()
 {
   strncpy(object_name,iname,GEO_NAME);
   object_name[GEO_NAME]=0;
@@ -53,10 +53,10 @@ bool WellInput::process_event(wEvent ev)
 }
 
 //===========================================================================
-/// global highlight(int mx, int my)
-///     highlights key
+/// global set_text(const char*)
+///     set test on the buffer
 /// tags WellInput
-void WellInput::set_text(char* txt)
+void WellInput::set_text(const char* txt)
 {
   if(txt)
   {

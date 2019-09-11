@@ -14,7 +14,7 @@ class XWellInput:public WellInput
   virtual void       draw_text();
   void               process_key(XEvent *xev);
  public:
-  XWellInput(char *iname);
+  XWellInput(const char *iname);
 
   virtual bool       process_event(wEvent);
 

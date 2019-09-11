@@ -133,6 +133,8 @@ class WellBase: public WellObject
   virtual  void     draw_grid();
   virtual  void     draw_box(int color, int x, int y);
 
+  void              read_int(FILE* fd, int* k);
+
  public:
   WellBase();
   void              init(WellEngine*);
@@ -151,7 +153,7 @@ class WellBase: public WellObject
     { 
       game_over_object=obj;
     };
-  void              set_player_name(char *pn)
+  void              set_player_name(const char *pn)
     {
       strcpy(player_name,pn);
     };

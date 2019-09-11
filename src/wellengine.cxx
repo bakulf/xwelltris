@@ -206,19 +206,19 @@ WellTopNine* WellEngine::new_well_top_nine()
 
 
 //===========================================================================
-/// global new_well_key(char*)
+/// global new_well_key(const char*)
 ///     creates new key object
 /// tags WellEngine
-WellKey* WellEngine::new_well_key(char* name)
+WellKey* WellEngine::new_well_key(const char* name)
 {
   return new WellKey(name);
 }
 
 //===========================================================================
-/// global new_well_switch(char*)
+/// global new_well_switch(const char*)
 ///     creates new switch object
 /// tags WellEngine
-WellSwitch* WellEngine::new_well_switch(char* name)
+WellSwitch* WellEngine::new_well_switch(const char* name)
 {
   return new WellSwitch(name);
 }

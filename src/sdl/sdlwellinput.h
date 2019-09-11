@@ -15,7 +15,7 @@ class SDLWellInput:public WellInput
   void               hide_cursor();
 
  public:
-  SDLWellInput(char *iname);
+  SDLWellInput(const char *iname);
 
   virtual bool       process_event(wEvent);
 

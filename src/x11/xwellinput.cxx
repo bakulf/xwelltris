@@ -23,10 +23,10 @@
 #include "xwellengine.h"
 
 //===========================================================================
-/// global XWellInput(char*)
+/// global XWellInput(const char*)
 ///     constructor - fill name and get geometry
 /// tags XWellInput
-XWellInput::XWellInput(char* iname) : WellInput(iname)
+XWellInput::XWellInput(const char* iname) : WellInput(iname)
 {
   xengine=(XWellEngine*) default_well_engine;
   mainw=xengine->get_main_window();

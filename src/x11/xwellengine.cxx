@@ -36,7 +36,7 @@ Colormap defcmp;
 const unsigned long TIMESTEP=10000l;
 
 //Colors for welltris pieces and grid (x color names)
-static char    *game_color_names[MAX_GAME_COLORS] = 
+static const char    *game_color_names[MAX_GAME_COLORS] = 
 {
   /* 0*/  "Red", 
   /* 1*/  "Green", 
@@ -167,7 +167,7 @@ XWellEngine::~XWellEngine()
 /// tags XWellEngine
 void XWellEngine::init_mainwindow(int argc,char **argv)
 {
-  char *winname="X Welltris "VERSION;
+  const char *winname="X Welltris " VERSION;
   XSetWindowAttributes xswa;
   XWindowAttributes xwinattr;
   XGCValues         gcv;
@@ -194,9 +194,9 @@ void XWellEngine::init_mainwindow(int argc,char **argv)
     fprintf(stderr,"xwelltris: Error allocating ClassHint\n");
     exit(1);
   }
-  pch->res_name="xwelltris";
-  pch->res_class="XWELLTRIS";
-  if(XStringListToTextProperty(&winname,1,&wname)==0)
+  pch->res_name=(char*)"xwelltris";
+  pch->res_class=(char*)"XWELLTRIS";
+  if(XStringListToTextProperty((char**)&winname,1,&wname)==0)
   {
     fprintf(stderr,"xwelltris: Error creating TextProperty\n");
     exit(1);
@@ -247,10 +247,10 @@ void XWellEngine::show_main()
 }
 
 //===========================================================================
-/// global load_image(Images id, char* name)
+/// global load_image(Images id, const char* name)
 ///     Load image into memory and register it with given id for use
 /// tags XWellEngine
-bool XWellEngine::load_image(Images id, char* name)
+bool XWellEngine::load_image(Images id, const char* name)
 {
   char buf[L_MAXPATH];
 
@@ -550,28 +550,28 @@ WellIntro* XWellEngine::new_well_intro()
 }
 
 //===========================================================================
-/// global new_well_key(char*)
+/// global new_well_key(const char*)
 ///     creates new key object - version for X Window
 /// tags XWellEngine
-WellKey* XWellEngine::new_well_key(char* name)
+WellKey* XWellEngine::new_well_key(const char* name)
 {
   return new WellKey(name);
 }
 
 //===========================================================================
-/// global new_well_switch(char*)
+/// global new_well_switch(const char*)
 ///     creates new switch object - version for X Window
 /// tags XWellEngine
-WellSwitch* XWellEngine::new_well_switch(char* name)
+WellSwitch* XWellEngine::new_well_switch(const char* name)
 {
   return new WellSwitch(name);
 }
 
 //===========================================================================
-/// global new_well_input(char*)
+/// global new_well_input(const char*)
 ///     creates new input object - version for X Window
 /// tags XWellEngine
-WellInput* XWellEngine::new_well_input(char* name)
+WellInput* XWellEngine::new_well_input(const char* name)
 {
   return new XWellInput(name);
 }

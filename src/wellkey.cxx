@@ -27,10 +27,10 @@
 //////////////////////////////WellKey class///////////////////////////////
 
 //===========================================================================
-/// global WellKey(char*)
+/// global WellKey(const char*)
 ///     constructor - fill name and get geometry
 /// tags WellKey
-WellKey::WellKey(char* iname) : WellObject()
+WellKey::WellKey(const char* iname) : WellObject()
 {
   strncpy(object_name,iname,GEO_NAME);
   object_name[GEO_NAME]=0;

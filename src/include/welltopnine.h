@@ -28,7 +28,7 @@ struct Score
   void              set_current_time();
   char*             get_next_token(char* from, char* to);
   void              calc_play_time();
-  void              set_player(char* pl);
+  void              set_player(const char* pl);
   void              set_params(int iscore, int ilines, int ilevel) 
                      { 
 		       score=iscore; lines=ilines; level=ilevel;

@@ -149,10 +149,10 @@ void Score::calc_play_time()
 }
 
 //===========================================================================
-/// global set_player(char* pl)
+/// global set_player(const char* pl)
 ///     set player name
 /// tags Score
-void Score::set_player(char* name)
+void Score::set_player(const char* name)
 {
   if(name)
     strncpy(player,name,PLAYER_NAME_LEN);

@@ -34,13 +34,13 @@ class SDLWellEngine:public WellEngine
     ~SDLWellEngine();
     virtual void     show_main();
     virtual void     event_loop();
-    virtual bool     load_image(Images id, char* name);
+    virtual bool     load_image(Images id, const char* name);
     virtual void     set_main_background_image(Images id);
     virtual WellImageFont*     new_well_image_font(Images id, 
 						   unsigned int ifl, 
 						   unsigned int ifh, 
 						   int idx, int idy);
-    virtual WellInput*         new_well_input(char*);
+    virtual WellInput*         new_well_input(const char*);
     virtual WellDrawingEngine* new_well_drawing_engine();
 
     SDL_Surface*     get_pixmap_of_image(Images id) { return pics[id];};
